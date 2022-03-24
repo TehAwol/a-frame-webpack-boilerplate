@@ -28,9 +28,9 @@ AFRAME.registerComponent('throw-ball', {
     this.el.object3D.lookAt(this.vector);
     this.vector2.negate();
     // Freeze object until throw
-    // Apply force scaled force to entity
-    let intensity = (Math.random() * 15) + 15;
-    const force = new Ammo.btVector3(this.vector2.x* intensity, 0, this.vector2.z * intensity );
+    // Apply randomised scaled force to ball
+    let intensity = (Math.random() * 15) + 25;
+    const force = new Ammo.btVector3(this.vector2.x* intensity, this.vector2.y, this.vector2.z * intensity );
     const pos = new Ammo.btVector3(this.el.object3D.position);
     this.el.body.applyForce(force, pos);
     // Memory optimisation

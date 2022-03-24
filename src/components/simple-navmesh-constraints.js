@@ -80,6 +80,7 @@ AFRAME.registerComponent('simple-navmesh-constraint', {
             this.lastPosition.copy(hitPos);
             results.splice(0);
             didHit = true;
+            console.log('moving')
             break;
           }
         }

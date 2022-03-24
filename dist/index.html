@@ -32,11 +32,13 @@
       <a-mixin id="ball-geometry-normal" geometry="primitive: sphere; radius: .3"></a-mixin>
       <a-mixin id="ball-geometry-small" geometry="primitive: sphere; radius: .15"></a-mixin>
       <a-mixin id="ball-geometry-smallest" geometry="primitive: sphere; radius: .10"></a-mixin>
-      <a-mixin id="ball-position-easy" random-position="min: -5 1 -2; max: 5 2.5 -10"></a-mixin>
-      <a-mixin id="ball-position-hard" random-position="min: -7 1 -2; max: 7 2.5 -10"></a-mixin>
-      <a-mixin id="ball-position-dual" random-position="min: -5 1 2; max: 5 2.5 10"></a-mixin>
+      <a-mixin id="ball-position-easy" random-position="min: -5 1.5 -2; max: 5 3 -10"></a-mixin>
+      <a-mixin id="ball-position-hard" random-position="min: -7 1.5 -2; max: 7 3 -10"></a-mixin>
+      <a-mixin id="ball-position-dual" random-position="min: -5 1.5 2; max: 5 3 10"></a-mixin>
       <a-mixin id="ball-body"
         ammo-body="type: dynamic; emitCollisionEvents: true; activationState: disableDeactivation; mass: 1; gravity: 0 -0.2 0"></a-mixin>
+      <a-mixin id="ball-body-static"
+        ammo-body="type: static; emitCollisionEvents: true; activationState: disableDeactivation; mass: 1; gravity: 0 -0.2 0"></a-mixin>
       <a-mixin id="ball-shape" ammo-shape="type: sphere;"></a-mixin>
       <a-mixin id="ball-material-red" material="color: red" llight="type: point; color: red; intensity: .5;"></a-mixin>
       <a-mixin id="ball-material-blue" material="color: blue" llight="type: point; color: blue; intensity: .5;"></a-mixin>
@@ -46,11 +48,12 @@
       </a-mixin>
       <a-mixin id="sound" sound="src: assets/ball-spawn.wav; autoplay: true; volume: 1;"></a-mixin>
       <audio id="ball-hit" src="assets/ball-hit.wav" crossorigin="anonymous" preload="auto"></audio>
+      <audio id="ball-spawn" src="assets/ball-spawn.wav" crossorigin="anonymous" preload="auto"></audio>
       <audio id="ball-dead" src="assets/ball-dead.wav" crossorigin="anonymous" preload="auto" volume="0.5"></audio>
       <a-mixin id="animation-dead"
         animation="property: scale; to: 0 0 0; dur: 250; easing:easeInQuad; startEvents: startanim;"></a-mixin>
       <a-mixin id="animation-spawn"
-        animation="property: scale; from: 0 0 0; dur: 250; easing:easeInOutQuad; autoplay: true;"></a-mixin>
+        animation="property: scale; from: 0 0 0; dur: 250; easing:easeInOutQuad; startEvents: spawnanim"></a-mixin>
     </a-assets>
 
 
@@ -87,29 +90,29 @@
 
 
     <!-- MENU ELEMENTS -->
-    <!-- <a-sphere id="starter" radius=".3" material="color: green" position="-1.2 3 -1.2"
+    <!-- <a-sphere id="starter" radius=".2" material="color: green" position="-1 3 -1"
       ammo-body="type: dynamic; emitCollisionEvents: true;" ammo-shape="type: sphere"></a-sphere> -->
-      <a-entity class="menu-item" position="-1.2 1.5 -1.2" rotation="0 35 0">
+      <a-entity class="menu-item" position="-1 1.5 -1" rotation="0 35 0">
         <a-entity position="0 0 .3" text="value: EASY MODE; align: center;"></a-entity>
-        <a-sphere id="start-mode-easy" radius=".3" material="color: green"
+        <a-sphere id="start-mode-easy" radius=".2" material="color: green" llight="type: hemisphere; color: green; intensity: .05"
       ammo-body="type: static; emitCollisionEvents: true;" ammo-shape="type: sphere"
       collision-ball__start="target: #sword; emitEvent: play-mode-easy; emitTarget: .easy-mode-generator"></a-sphere>
       </a-entity>
-      <a-entity class="menu-item" position="0 1.5 -1.5">
+      <a-entity class="menu-item" position="0 1.5 -1.2">
         <a-entity position="0 0 .3" text="value: MEDIUM MODE; align: center;"></a-entity>
-        <a-sphere id="start-mode-medium" radius=".3" material="color: yellow"
+        <a-sphere id="start-mode-medium" radius=".2" material="color: yellow" llight="type: hemisphere; color: yellow; intensity: .05"
       ammo-body="type: static; emitCollisionEvents: true;" ammo-shape="type: sphere"
       collision-ball__start="target: #sword; emitEvent: play-mode-medium; emitTarget: .medium-mode-generator"></a-sphere>
       </a-entity>
-      <a-entity class="menu-item" position="1.2 1.5 -1.2" rotation="0 -35 0">
+      <a-entity class="menu-item" position="1 1.5 -1" rotation="0 -35 0">
         <a-entity position="0 0 .3" text="value: HARD MODE; align: center;"></a-entity>
-        <a-sphere id="start-mode-hard" radius=".3" material="color: red"
+        <a-sphere id="start-mode-hard" radius=".2" material="color: red" llight="type: hemisphere; color: red; intensity: .05"
       ammo-body="type: static; emitCollisionEvents: true;" ammo-shape="type: sphere"
       collision-ball__start="target: #sword; emitEvent: play-mode-hard; emitTarget: .hard-mode-generator"></a-sphere>
       </a-entity>
-      <a-entity class="menu-item" position="0 1.5 1">
+      <a-entity class="menu-item" position="0 1.5 1.2">
         <a-entity position="0 0 -.3" rotation="180 0 180" text="value: DUAL MODE; align: center;"></a-entity>
-        <a-sphere id="start-mode-dual" radius=".3" material="color: purple"
+        <a-sphere id="start-mode-dual" radius=".2" material="color: purple"
       ammo-body="type: static; emitCollisionEvents: true;" ammo-shape="type: sphere"
       collision-ball__start="target: #sword; emitEvent: play-mode-dual; emitTarget: .dual-mode-generator"></a-sphere>
       </a-entity>
