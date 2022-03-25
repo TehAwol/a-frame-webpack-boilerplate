@@ -13,14 +13,13 @@
 </head>
 
 <body>
-  <a-scene id="scene" physics="driver: ammo; debug: false; debug: false;">
+  <a-scene stats id="scene" physics="driver: ammo; debug: false; debug: false;">
 
-    <a-entity id="env" ammo-body="type; static" environment="active: true; preset: tron; playArea: 1; grid: 1x1;">
+    <a-entity id="env" environment="active: true; preset: tron; playArea: 1; grid: 1x1;">
     </a-entity>
 
     <a-plane id="floor" position="0 -0.1 0" rotation="-90 0 0" width="100" height="100"
       ammo-body="type: static; emitCollisionEvents: true;" ammo-shape="type: box"></a-plane>
-    <a-plane id="navmesh" visible="false" position="0 0 0" rotation="-90 0 0" width="4" height="4"></a-plane>
     <a-sound src="assets/song.mp3" autoplay="true" position="0 2 5"></a-sound>
 
     <!-- <a-entity id="cylinder" geometry="primitive: cylinder; height: 1.2; radius: .05;" position="0 1 -1"
@@ -29,6 +28,9 @@
     <a-assets>
       <!-- <a-asset-item id="saber" src="/dist/assets/low_poly_space_ship/scene.gltf"></a-asset-item> -->
       <a-asset-item id="saber" src="assets/gundam_beam_saber/scene.gltf"></a-asset-item>
+      <a-asset-item id="soccer-ball" src="assets/soccer_ball/scene.gltf"></a-asset-item>
+      <a-asset-item id="beach-ball" src="assets/beach_ball/scene.gltf"></a-asset-item>
+      <a-entity gltf-model="#soccer-ball" scale=".2 .2 .2"></a-entity>
       <a-mixin id="ball-geometry-normal" geometry="primitive: sphere; radius: .3"></a-mixin>
       <a-mixin id="ball-geometry-small" geometry="primitive: sphere; radius: .15"></a-mixin>
       <a-mixin id="ball-geometry-smallest" geometry="primitive: sphere; radius: .10"></a-mixin>
@@ -127,7 +129,7 @@
 
 
     <a-entity id="camera-rig" position="0 0 0">
-      <a-entity id="head" camera wasd-controls look-controls="pointerLockEnabled: true" position="0 1.8 0" simple-navmesh-constraint="navmesh: #navmesh"></a-entity>
+      <a-entity id="head" camera wasd-controls look-controls="pointerLockEnabled: true" position="0 1.8 0"></a-entity>
       <a-entity oculus-touch-controls="hand: left"></a-entity>
       <a-entity oculus-touch-controls="hand: right"
         haptics="events: triggerHaptic; eventsFrom: #sword; dur: 200; force: 0.5">
